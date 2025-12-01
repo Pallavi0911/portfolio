@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D. Pallavi | Security Analyst & SOC Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* UPDATED PALETTE */
+            --bg-main: #020617; /* deep slate */
+            --bg-soft: #020617;
+            --bg-card: rgba(15, 23, 42, 0.98);
+            --border-subtle: rgba(148, 163, 184, 0.25);
+
+            --accent-1: #22d3ee; /* cyan */
+            --accent-2: #fb7185; /* soft pink/red */
+            --accent-3: #a855f7; /* violet */
+
+            --text-main: #f9fafb;
+            --text-muted: #9ca3af;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background:
+                radial-gradient(circle at top, #020617 0, #020617 35%, #020617 50%),
+                radial-gradient(circle at 10% 20%, rgba(34, 211, 238, 0.22), transparent 60%),
+                radial-gradient(circle at 90% 10%, rgba(248, 113, 113, 0.25), transparent 60%),
+                radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.23), transparent 60%);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at 10% 20%, rgba(34, 211, 238, 0.18), transparent 60%),
+                radial-gradient(circle at 80% 0%, rgba(248, 113, 113, 0.16), transparent 55%),
+                radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.18), transparent 55%);
+            opacity: 0.9;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        /* NAVBAR */
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(
+                120deg,
+                rgba(15, 23, 42, 0.95),
+                rgba(2, 6, 23, 0.96)
+            );
+            backdrop-filter: blur(18px);
+            padding: 18px 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(30, 64, 175, 0.7);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            background: linear-gradient(120deg, var(--accent-1), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+            transition: transform 0.25s ease;
+        }
+
+        .logo:hover {
+            transform: translateY(-2px) scale(1.03);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 28px;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            position: relative;
+            padding-bottom: 4px;
+            transition: color 0.25s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+            transition: width 0.25s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent-1);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* SECTIONS */
+
+        section {
+            padding: 120px 0;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 100px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 64px;
+            align-items: center;
+        }
+
+        .hero-kicker {
+            font-size: 12px;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--accent-1);
+            margin-bottom: 16px;
+        }
+
+        .hero-text h1 {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #e5e7eb, var(--accent-1));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 0.7s ease;
+        }
+
+        .hero-text h2 {
+            font-size: 22px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-weight: 400;
+            max-width: 520px;
+            animation: fadeInUp 0.7s ease 0.15s both;
+        }
+
+        .hero-text p {
+            font-size: 15px;
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 32px;
+            max-width: 620px;
+            animation: fadeInUp 0.7s ease 0.3s both;
+        }
+
+        .hero-highlights {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 28px;
+            animation: fadeInUp 0.7s ease 0.4s both;
+        }
+
+        .pill {
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            color: var(--text-muted);
+            background: rgba(15, 23, 42, 0.9);
+        }
+
+        .pill-accent {
+            border-color: rgba(34, 211, 238, 0.8);
+            color: var(--accent-1);
+            background: radial-gradient(circle at top left,
+                rgba(34, 211, 238, 0.25),
+                rgba(15, 23, 42, 0.98));
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            animation: fadeInUp 0.7s ease 0.5s both;
+        }
+
+        .btn {
+            padding: 14px 30px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.25s ease;
+            border: 1px solid transparent;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .btn-primary {
+            background: linear-gradient(120deg, var(--accent-1), var(--accent-2));
+            color: #020617;
+            box-shadow: 0 18px 40px rgba(34, 211, 238, 0.45);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 24px 60px rgba(248, 113, 113, 0.6);
+        }
+
+        .btn-outline {
+            border-color: rgba(148, 163, 184, 0.6);
+            color: var(--text-main);
+            background: radial-gradient(circle at top left,
+                rgba(15, 23, 42, 0.98),
+                rgba(15, 23, 42, 0.9));
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent-1);
+            color: var(--accent-1);
+            transform: translateY(-2px);
+        }
+
+        /* PROFILE */
+
+        .profile-section {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-wrapper {
+            position: relative;
+            width: 360px;
+            height: 360px;
+        }
+
+        .profile-ring {
+            position: absolute;
+            inset: -14px;
+            border-radius: 50%;
+            background:
+                conic-gradient(from 160deg,
+                    rgba(34, 211, 238, 0.45),
+                    rgba(248, 113, 113, 0.4),
+                    rgba(168, 85, 247, 0.5),
+                    rgba(34, 211, 238, 0.45));
+            filter: blur(14px);
+            opacity: 0.95;
+            animation: spinGlow 18s linear infinite;
+        }
+
+        .profile-circle {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid rgba(148, 163, 184, 0.55);
+            box-shadow: 0 28px 70px rgba(15, 23, 42, 0.95);
+            background: radial-gradient(circle at 30% 0,
+                #1f2937,
+                #020617);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-badge {
+            position: absolute;
+            bottom: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(15, 23, 42, 0.98);
+            border-radius: 999px;
+            padding: 8px 18px;
+            border: 1px solid rgba(34, 211, 238, 0.8);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--accent-1);
+        }
+
+        .profile-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #22c55e;
+            box-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
+        }
+
+        /* STATS */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 22px;
+            margin-top: 54px;
+        }
+
+        .stat-box {
+            text-align: left;
+            padding: 20px 18px;
+            background: linear-gradient(
+                135deg,
+                rgba(15, 23, 42, 0.98),
+                rgba(15, 23, 42, 0.96)
+            );
+            border-radius: 16px;
+            border: 1px solid rgba(31, 41, 55, 0.9);
+            transition: all 0.25s ease;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-4px);
+            border-color: rgba(34, 211, 238, 0.9);
+            box-shadow: 0 22px 40px rgba(15, 23, 42, 0.95);
+            background: radial-gradient(circle at top left,
+                rgba(34, 211, 238, 0.16),
+                rgba(15, 23, 42, 0.98));
+        }
+
+        .stat-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .stat-box h3 {
+            font-size: 26px;
+            font-weight: 700;
+            background: linear-gradient(120deg, var(--accent-1), var(--accent-3));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* SECTION TITLES */
+
+        .section-title {
+            text-align: left;
+            margin-bottom: 52px;
+        }
+
+        .section-kicker {
+            font-size: 11px;
+            letter-spacing: 0.26em;
+            text-transform: uppercase;
+            color: var(--accent-1);
+            margin-bottom: 10px;
+        }
+
+        .section-title h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            background: linear-gradient(120deg, #e5e7eb, var(--accent-1));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+            font-size: 14px;
+            max-width: 520px;
+        }
+
+        /* SKILLS */
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 24px;
+        }
+
+        .skill-card {
+            background: var(--bg-card);
+            padding: 22px 20px;
+            border-radius: 18px;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.25s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(34, 211, 238, 0.85);
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.95);
+            background: radial-gradient(circle at top left,
+                rgba(34, 211, 238, 0.15),
+                rgba(15, 23, 42, 0.98));
+        }
+
+        .skill-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .skill-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            background: radial-gradient(circle at 30% 0,
+                rgba(34, 211, 238, 0.22),
+                rgba(15, 23, 42, 1));
+            color: var(--accent-1);
+        }
+
+        .skill-card h3 {
+            font-size: 15px;
+        }
+
+        .skill-card p {
+            color: var(--text-muted);
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        /* PROJECTS */
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 28px;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            border: 1px solid var(--border-subtle);
+            overflow: hidden;
+            transition: all 0.25s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(251, 113, 133, 0.9);
+            box-shadow: 0 26px 55px rgba(15, 23, 42, 0.98);
+        }
+
+        .project-header {
+            padding: 22px 24px;
+            background: radial-gradient(circle at top left,
+                rgba(251, 113, 133, 0.35),
+                rgba(15, 23, 42, 1));
+            border-bottom: 1px solid rgba(55, 65, 81, 0.85);
+        }
+
+        .project-header h3 {
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .project-sub {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .project-body {
+            padding: 20px 24px 22px;
+        }
+
+        .project-body p {
+            color: var(--text-muted);
+            line-height: 1.8;
+            font-size: 13px;
+            margin-bottom: 16px;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .tech-tag {
+            background: rgba(15, 23, 42, 0.98);
+            color: var(--accent-1);
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 11px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border: 1px solid rgba(34, 211, 238, 0.45);
+        }
+
+        /* EXPERIENCE (TIMELINE) */
+
+        .timeline {
+            max-width: 900px;
+            margin-top: 10px;
+        }
+
+        .timeline-item {
+            padding-left: 36px;
+            position: relative;
+            padding-bottom: 32px;
+            border-left: 1px solid rgba(55, 65, 81, 0.85);
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -7px;
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            background: radial-gradient(circle at 30% 0,
+                var(--accent-2),
+                var(--accent-3));
+            border-radius: 50%;
+            box-shadow: 0 0 0 6px rgba(251, 113, 133, 0.25);
+        }
+
+        .timeline-content {
+            background: var(--bg-card);
+            padding: 20px 22px;
+            border-radius: 18px;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.25s ease;
+        }
+
+        .timeline-content:hover {
+            border-color: rgba(34, 211, 238, 0.9);
+            transform: translateX(4px);
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.98);
+        }
+
+        .timeline-content h3 {
+            font-size: 17px;
+            margin-bottom: 4px;
+        }
+
+        .timeline-content h4 {
+            font-size: 14px;
+            color: var(--accent-1);
+            margin-bottom: 4px;
+        }
+
+        .timeline-date {
+            color: var(--text-muted);
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+
+        .timeline-location {
+            color: var(--text-muted);
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .timeline-content ul {
+            list-style: none;
+        }
+
+        .timeline-content li {
+            color: var(--text-muted);
+            padding: 5px 0;
+            padding-left: 16px;
+            position: relative;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .timeline-content li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent-1);
+            font-size: 14px;
+        }
+
+        /* EDUCATION */
+
+        .edu-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+            gap: 24px;
+            margin-top: 10px;
+        }
+
+        .edu-card {
+            background: var(--bg-card);
+            border-radius: 18px;
+            border: 1px solid var(--border-subtle);
+            padding: 22px 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .edu-degree {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .edu-meta {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .edu-highlight {
+            font-size: 13px;
+            color: var(--accent-1);
+        }
+
+        /* CONTACT */
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 24px;
+            margin-top: 10px;
+        }
+
+        .contact-card {
+            background: var(--bg-card);
+            padding: 26px 22px;
+            border-radius: 20px;
+            border: 1px solid var(--border-subtle);
+            text-align: left;
+            transition: all 0.25s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(34, 211, 238, 0.9);
+            box-shadow: 0 24px 50px rgba(15, 23, 42, 0.98);
+        }
+
+        .contact-label {
+            font-size: 12px;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .contact-card h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .contact-card a,
+        .contact-card p {
+            font-size: 14px;
+            color: var(--accent-1);
+            text-decoration: none;
+            word-break: break-word;
+        }
+
+        .contact-card a:hover {
+            color: var(--accent-2);
+        }
+
+        footer {
+            text-align: center;
+            padding: 52px 0 32px;
+            border-top: 1px solid rgba(31, 41, 55, 0.9);
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        /* ANIMATIONS & RESPONSIVE */
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes spinGlow {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 42px;
+            }
+
+            .hero-text h1 {
+                font-size: 40px;
+            }
+
+            .hero-text h2 {
+                max-width: none;
+            }
+
+            .hero-text p {
+                max-width: none;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .edu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .profile-wrapper {
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            nav ul {
+                gap: 14px;
+                font-size: 12px;
+            }
+
+            .hero-text h1 {
+                font-size: 32px;
+            }
+
+            .hero-text h2 {
+                font-size: 18px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-wrapper {
+                width: 280px;
+                height: 280px;
+            }
+
+            .section-title h2 {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <div class="logo">D. PALLAVI</div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO / HOME -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-text">
+                    <div class="hero-kicker">Security · SOC · Incident Response</div>
+                    <h1>Security Analyst & SOC Engineer</h1>
+                    <h2>Protecting organizations through proactive monitoring, threat detection, and incident response.</h2>
+                    <p>
+                        Technical Trainee Engineer with hands-on experience in security monitoring, phishing analysis, SIEM platforms, 
+                        and vulnerability assessment. Skilled in analyzing security alerts, investigating incidents, and administering 
+                        enterprise security systems spanning firewalls, endpoint protection, O365 Security, and Azure AD.
+                    </p>
+
+                    <div class="hero-highlights">
+                        <span class="pill pill-accent">SIEM · LogRhythm</span>
+                        <span class="pill">Incident Handling & Response</span>
+                        <span class="pill">Vulnerability Assessment · Nessus</span>
+                        <span class="pill">O365 & Azure AD Security</span>
+                    </div>
+
+                    <div class="cta-buttons">
+                        <a href="#projects" class="btn btn-primary">View Security Work</a>
+                        <a href="#contact" class="btn btn-outline">Get in Touch</a>
+                    </div>
+                </div>
+
+                <div class="profile-section">
+                    <div class="profile-wrapper">
+                        <div class="profile-ring"></div>
+                        <div class="profile-circle">
+                            <!-- Replace src with your photo path -->
+                            <img src="C:\Users\LENOVO L470\OneDrive\Desktop\anil\1760159167395.jpg" alt="D. Pallavi" onerror="this.style.display='none';">
+                            <div class="profile-badge">
+                                <span class="profile-dot"></span>
+                                Available for Security Roles
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STATS -->
+            <div class="stats">
+                <div class="stat-box">
+                    <div class="stat-label">Experience</div>
+                    <h3>Feb 2025+</h3>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Security Projects</div>
+                    <h3>1+</h3>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Bachelor CGPA</div>
+                    <h3>8.3</h3>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Focus Area</div>
+                    <h3>AIML</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+        <div class="container">
+            <div class="section-title">
+                <div class="section-kicker">Skills & Tools</div>
+                <h2>Security Skillset</h2>
+                <p>Core security, SOC, and networking capabilities aligned with modern enterprise environments.</p>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon">🧩</div>
+                        <h3>Incident Response</h3>
+                    </div>
+                    <p>
+                        Incident handling, phishing email analysis, malware analysis, post-incident investigation, 
+                        L1 & L2 alert analysis, security incident reporting, root cause & basic forensic analysis.
+                    </p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon">📈</div>
+                        <h3>SIEM & Monitoring</h3>
+                    </div>
+                    <p>
+                        LogRhythm SIEM, log analysis, alert triage and tuning, security analytics, 
+                        dashboard reviews, and continuous security monitoring for threat detection.
+                    </p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon">🔐</div>
+                        <h3>Security Systems</h3>
+                    </div>
+                    <p>
+                        Network & host-based firewalls, IDS/IPS, web & email filters, endpoint protection, 
+                        antivirus and anti-malware solutions including TrendMicro.
+                    </p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon">☁️</div>
+                        <h3>Cloud & Identity Security</h3>
+                    </div>
+                    <p>
+                        O365 Security & Compliance, Azure Active Directory, Microsoft 365 security controls, 
+                        identity and access management (IAM), VPN configurations, Windows AD.
+                    </p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon">🛰️</div>
+                        <h3>Threat Intelligence</h3>
+                    </div>
+                    <p>
+                        Threat intelligence and attack analysis, DLP concepts, disaster recovery awareness, 
+                        emerging threat pattern tracking, and risk analysis fundamentals.
+                    </p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon">🛡️</div>
+                        <h3>Vulnerability Management</h3>
+                    </div>
+                    <p>
+                        Vulnerability assessment using Nessus & Nmap, basic web application security, penetration 
+                        testing support, and risk register maintenance and reporting.
+                    </p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon">🌐</div>
+                        <h3>Network Fundamentals</h3>
+                    </div>
+                    <p>
+                        OSI model, TCP/IP, ports and protocols, basic networking, and network troubleshooting 
+                        to support security investigations and triage.
+                    </p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon">🛠️</div>
+                        <h3>Security Tools & Soft Skills</h3>
+                    </div>
+                    <p>
+                        Burp Suite, Wireshark, Zscaler, proxy tools, SNOW ticketing, planning & documentation, 
+                        stakeholder coordination, audit assistance, and security awareness support.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+        <div class="container">
+            <div class="section-title">
+                <div class="section-kicker">Hands-On Work</div>
+                <h2>Security Projects</h2>
+                <p>Applying security concepts to real-world network and application environments.</p>
+            </div>
+
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>🛡️ Vulnerabilities Assessment</h3>
+                        <div class="project-sub">Network Vulnerability Scanning Utility</div>
+                    </div>
+                    <div class="project-body">
+                        <p>
+                            Performed end-to-end vulnerability assessments using automated scanning tools to detect 
+                            misconfigurations, weak points, and exposure risks across network devices and web applications.
+                            Translated findings into actionable remediation steps to strengthen security posture.
+                        </p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Nmap</span>
+                            <span class="tech-tag">Nessus</span>
+                            <span class="tech-tag">Burp Suite</span>
+                            <span class="tech-tag">Web App Security</span>
+                        </div>
+                        <p>
+                            Integrated threat intelligence and phishing analysis insights to correlate vulnerabilities with 
+                            real-world attack patterns, and helped define firewall and IDS/IPS rules to mitigate risks.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>📊 SOC Monitoring & Alert Triage</h3>
+                        <div class="project-sub">Operational Security Support</div>
+                    </div>
+                    <div class="project-body">
+                        <p>
+                            Supported SOC operations by monitoring SIEM alerts, analyzing logs, and triaging L1/L2 incidents. 
+                            Helped differentiate false positives from genuine threats and escalated critical issues for 
+                            rapid containment and response.
+                        </p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">LogRhythm</span>
+                            <span class="tech-tag">SIEM</span>
+                            <span class="tech-tag">Email & Web Security</span>
+                            <span class="tech-tag">Endpoint Protection</span>
+                        </div>
+                        <p>
+                            Documented findings in ticketing systems, contributed to incident reports, and supported 
+                            continuous improvement of security detection rules and workflows.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+        <div class="container">
+            <div class="section-title">
+                <div class="section-kicker">Career Path</div>
+                <h2>Professional Experience</h2>
+                <p>Real-world SOC and security operations exposure in an enterprise environment.</p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Technical Trainee Engineer</h3>
+                        <h4>Timon Global</h4>
+                        <p class="timeline-date">Feb 2025 – Present</p>
+                        <p class="timeline-location">Hyderabad, India</p>
+                        <ul>
+                            <li>Monitored SIEM platforms for security alerts, analyzed logs, and performed L1 & L2 alert analysis for threat detection.</li>
+                            <li>Handled security incidents including phishing email analysis, malware identification, and post-incident investigations.</li>
+                            <li>Administered security systems including firewalls, web filters, IDS/IPS, endpoint protection, and antivirus solutions.</li>
+                            <li>Performed vulnerability assessments using Nessus and network scanning tools to identify and prioritize security weaknesses.</li>
+                            <li>Supported O365 Security, Azure Active Directory, and access management activities to maintain secure user access.</li>
+                            <li>Created security incident reports and documentation using ticketing systems to track issues through resolution.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+        <div class="container">
+            <div class="section-title">
+                <div class="section-kicker">Academic</div>
+                <h2>Education</h2>
+                <p>Formal grounding in Computer Science and Engineering with specialization in AI & ML.</p>
+            </div>
+
+            <div class="edu-grid">
+                <div class="edu-card">
+                    <div class="edu-degree">
+                        Bachelor of Engineering in Computer Science and Engineering (AIML)
+                    </div>
+                    <div class="edu-meta">
+                        Sri Indu College of Engineering and Technology, Hyderabad · 2021 – 2025
+                    </div>
+                    <div class="edu-highlight">
+                        CGPA: 8.3
+                    </div>
+                </div>
+
+                <div class="edu-card">
+                    <div class="edu-meta">
+                        <strong>Focus Areas:</strong> Artificial Intelligence, Machine Learning, security basics, 
+                        and core computer science fundamentals.
+                    </div>
+                    <div class="edu-meta">
+                        Built a strong foundation for applying analytical thinking, problem-solving, and 
+                        automation skills in cybersecurity roles.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-title">
+                <div class="section-kicker">Connect</div>
+                <h2>Contact</h2>
+                <p>Open to opportunities in Security Analyst, SOC, and InfoSec roles.</p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-label">Email</div>
+                    <h3>Reach Out</h3>
+                    <a href="mailto:pallavidubba1109@gmail.com">pallavidubba1109@gmail.com</a>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-label">Phone</div>
+                    <h3>Call / WhatsApp</h3>
+                    <p>+91 8179514916</p>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-label">Profiles</div>
+                    <h3>Professional Links</h3>
+                    <p>LinkedIn — add your URL here</p>
+                    <p>GitHub — add your URL here</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        © <span id="year"></span> D. Pallavi · Crafted for modern security roles
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
